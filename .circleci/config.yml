@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   docker: circleci/docker@2
   maven: circleci/maven@1
+  buildevents: honeycombio/buildevents@0
 
 commands:
 
@@ -15,7 +16,16 @@ commands:
       - run: mvn clean verify -pl << parameters.service >> -Pcode-coverage -Pstatic-code-analysis
 
 jobs:
-
+  setup:
+    docker:
+      - image: cimg/go:1.18
+    steps:
+        - buildevents/start_trace
+  watch:
+    docker:
+      - image: cimg/go:1.18
+    steps:
+      - buildevents/watch_build_and_finish
   terraform-apply:
     working_directory: ~/microservices-testing-examples/terraform
     docker:
@@ -117,6 +127,10 @@ workflows:
 
   build_and_test:
     jobs:
+      - setup
+      - watch:
+          requires:
+            - setup
       - build:
           matrix:
             parameters:
