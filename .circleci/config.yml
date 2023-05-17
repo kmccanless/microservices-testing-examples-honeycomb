@@ -81,7 +81,7 @@ jobs:
               background: true
           - buildevents/berun:
               bename: "Set short commit SHA"
-              becommand: echo $CIRCLE_SHA1
+              becommand: echo 'export GIT_SHORT_SHA=$(echo $CIRCLE_SHA1)' >> $BASH_ENV
           -  buildevents/berun:
               bename: Pact-build-and-test-welcome-member-email-service
               becommand: |
