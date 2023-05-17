@@ -81,7 +81,7 @@ jobs:
               background: true
           - run:
               name: "Set short commit SHA"
-              command: echo $CIRCLE_SHA
+              command: echo $CIRCLE_SHA1
           -  buildevents/berun:
               bename: Pact-build-and-test-welcome-member-email-service
               becommand: |
