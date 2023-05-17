@@ -81,7 +81,7 @@ jobs:
               background: true
           - run:
               name: "Set short commit SHA"
-              command: echo 'export GIT_SHORT_SHA=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+              command: echo 'export GIT_SHORT_SHA=$(echo $CIRCLE_SHA1 | cut -c -7)'
           -  buildevents/berun:
               bename: Pact-build-and-test-welcome-member-email-service
               becommand: |
