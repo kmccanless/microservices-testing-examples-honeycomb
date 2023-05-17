@@ -79,9 +79,9 @@ jobs:
               name: Start-dependencies-with-docker-compose
               command: docker-compose -f pact-tools/pact-broker/docker-compose.yml up
               background: true
-          # - buildevents/berun:
-          #     bename: "Set short commit SHA"
-          #     becommand: echo 'export GIT_SHORT_SHA=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+          - run:
+              name: "Set short commit SHA"
+              command: echo 'export GIT_SHORT_SHA=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
           -  buildevents/berun:
               bename: Pact-build-and-test-welcome-member-email-service
               becommand: |
